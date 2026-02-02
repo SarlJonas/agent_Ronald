@@ -1,0 +1,2164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ronald - Agent IA Collégiens | CollegePro by Jonas Browser High-Tech</title>
+    <meta name="description" content="Ronald, premier Agent IA en France qui prédit les examens du Brevet 2026. Concept développé par Ingénieure Gautier Hayet.">
+    <meta name="author" content="SARL Jonas Browser High-Tech">
+    <meta property="og:title" content="Ronald - Agent IA Prédictif Brevet 2026">
+    <meta property="og:description" content="Premier Agent IA en France pour prédire les sujets du Brevet 2026">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #C9A227;
+            --primary-gold-light: #E8C547;
+            --primary-blue-dark: #0a1628;
+            --primary-blue: #1a365d;
+            --primary-blue-mid: #2563eb;
+            --primary-blue-light: #3b82f6;
+            --accent-red: #dc2626;
+            --white: #ffffff;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-600: #4b5563;
+            --gray-800: #1f2937;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-blue-dark) 0%, var(--primary-blue) 50%, var(--primary-blue-mid) 100%);
+            min-height: 100vh;
+            color: var(--white);
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201, 162, 39, 0.3);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-jb {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary-blue-dark);
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            letter-spacing: 1px;
+        }
+
+        .logo-text .tagline {
+            font-size: 0.7rem;
+            color: var(--gray-200);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .college-pro-badge {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+            color: var(--primary-blue-dark);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.3);
+        }
+
+        .user-stats {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .stat-badge.gold { border-color: var(--primary-gold); color: var(--primary-gold); }
+        .stat-badge.purple { border-color: #a855f7; color: #a855f7; }
+        .stat-badge.green { border-color: #22c55e; color: #22c55e; }
+
+        /* Navigation */
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-tab {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+            color: var(--primary-blue-dark);
+            border-color: var(--primary-gold);
+            box-shadow: 0 4px 20px rgba(201, 162, 39, 0.4);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 2rem;
+        }
+
+        .view {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero-card {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2) 0%, rgba(37, 99, 235, 0.3) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--primary-gold);
+            color: var(--primary-blue-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-title span {
+            color: var(--primary-gold);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--gray-200);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+            color: var(--primary-blue-dark);
+            box-shadow: 0 4px 20px rgba(201, 162, 39, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(201, 162, 39, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-mascot {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            box-shadow: 0 10px 40px rgba(201, 162, 39, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* First in France Banner */
+        .first-banner {
+            background: linear-gradient(90deg, var(--accent-red) 0%, #b91c1c 100%);
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+        }
+
+        .first-banner span {
+            color: var(--primary-gold);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--gray-200);
+        }
+
+        /* Progress Ring */
+        .progress-ring {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-ring svg {
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-text {
+            position: absolute;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Subject Cards */
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .subject-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .subject-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+        }
+
+        .subject-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .subject-icon {
+            font-size: 2rem;
+        }
+
+        .subject-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .subject-progress {
+            font-size: 0.85rem;
+            color: var(--gray-200);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        /* Predictions Section */
+        .predictions-header {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(201, 162, 39, 0.2) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 25px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .predictions-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .predictions-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+        }
+
+        .subject-tabs {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .subject-tab {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .subject-tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .subject-tab.active {
+            background: var(--primary-gold);
+            color: var(--primary-blue-dark);
+            border-color: var(--primary-gold);
+        }
+
+        .prediction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .prediction-section h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .prediction-section h3::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .prediction-section.high h3::before { background: #22c55e; }
+        .prediction-section.medium h3::before { background: #f59e0b; }
+
+        .prediction-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .prediction-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .prediction-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .prediction-topic {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+        }
+
+        .prediction-confidence {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .prediction-confidence.high { color: #22c55e; }
+        .prediction-confidence.medium { color: #f59e0b; }
+
+        .confidence-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .confidence-fill.high { background: linear-gradient(90deg, #22c55e, #16a34a); }
+        .confidence-fill.medium { background: linear-gradient(90deg, #f59e0b, #d97706); }
+
+        /* Quiz Section */
+        .quiz-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .quiz-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 2.5rem;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-subject {
+            background: var(--primary-gold);
+            color: var(--primary-blue-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .quiz-progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-gold), var(--primary-gold-light));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .quiz-question {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .quiz-option:hover:not(.selected):not(.correct):not(.wrong) {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-gold);
+        }
+
+        .quiz-option.selected { border-color: var(--primary-blue-light); background: rgba(59, 130, 246, 0.2); }
+        .quiz-option.correct { border-color: #22c55e; background: rgba(34, 197, 94, 0.2); }
+        .quiz-option.wrong { border-color: #ef4444; background: rgba(239, 68, 68, 0.2); }
+
+        .option-letter {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .quiz-explanation {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 15px;
+            padding: 1.25rem;
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .quiz-explanation-icon {
+            font-size: 1.5rem;
+        }
+
+        .quiz-result {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .result-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.3);
+        }
+
+        .result-score {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .result-score .score {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary-blue-dark);
+        }
+
+        .result-score .label {
+            color: var(--primary-blue-dark);
+            opacity: 0.8;
+        }
+
+        /* Chat Section */
+        .chat-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .chat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .chat-info h3 {
+            color: var(--primary-blue-dark);
+            font-weight: 700;
+        }
+
+        .chat-info .status {
+            font-size: 0.8rem;
+            color: var(--primary-blue-dark);
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .message {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 85%;
+        }
+
+        .message.ronald { align-self: flex-start; }
+        .message.user { align-self: flex-end; flex-direction: row-reverse; }
+
+        .message-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .message.ronald .message-avatar {
+            background: var(--primary-gold);
+            color: var(--primary-blue-dark);
+        }
+
+        .message.user .message-avatar {
+            background: var(--primary-blue-light);
+        }
+
+        .message-bubble {
+            padding: 1rem 1.25rem;
+            border-radius: 20px;
+            line-height: 1.5;
+        }
+
+        .message.ronald .message-bubble {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+            color: var(--primary-blue-dark);
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.user .message-bubble {
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom-right-radius: 5px;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 0.3rem;
+            padding: 0.5rem;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary-blue-dark);
+            opacity: 0.6;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+        }
+
+        .chat-input-area {
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1rem 1.25rem;
+            color: var(--white);
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .chat-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+            color: var(--primary-blue-dark);
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .quick-replies {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-reply {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-reply:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-gold);
+        }
+
+        /* Progress View */
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .progress-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+
+        .progress-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .progress-card-status {
+            font-size: 0.85rem;
+            color: var(--primary-gold);
+        }
+
+        .badges-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+
+        .badges-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .badges-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .badge-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .badge-item.unlocked {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.3));
+            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+        }
+
+        .badge-item.locked {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .badge-item.locked .badge-icon {
+            filter: grayscale(1);
+            opacity: 0.4;
+        }
+
+        /* Daily Challenge */
+        .challenge-card {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, #d97706 100%);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .challenge-info h3 {
+            color: var(--primary-blue-dark);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .challenge-info p {
+            color: var(--primary-blue-dark);
+            opacity: 0.8;
+            margin-top: 0.3rem;
+        }
+
+        .challenge-progress {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .challenge-step {
+            width: 35px;
+            height: 35px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .challenge-step.done {
+            background: var(--primary-blue-dark);
+            color: var(--white);
+        }
+
+        .challenge-step.pending {
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--primary-blue-dark);
+        }
+
+        .challenge-btn {
+            background: var(--primary-blue-dark);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .challenge-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(201, 162, 39, 0.3));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--gray-200);
+            line-height: 1.5;
+        }
+
+        /* Methodology */
+        .methodology-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .methodology-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .methodology-item {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        .methodology-item .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .methodology-item h4 {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .methodology-item p {
+            font-size: 0.8rem;
+            color: var(--gray-200);
+        }
+
+        /* Ronald Advice */
+        .ronald-advice {
+            background: linear-gradient(135deg, var(--primary-blue-mid) 0%, #1d4ed8 100%);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            margin-top: 2rem;
+        }
+
+        .advice-avatar {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .advice-content h4 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .advice-content p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 22, 40, 0.95);
+            border-top: 1px solid rgba(201, 162, 39, 0.3);
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--primary-blue-dark);
+        }
+
+        .footer-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+        }
+
+        .footer-description {
+            color: var(--gray-200);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-section h4 {
+            color: var(--primary-gold);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--gray-200);
+            font-size: 0.9rem;
+            line-height: 1.8;
+            text-decoration: none;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-gold);
+        }
+
+        .footer-credits {
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .credits-title {
+            color: var(--primary-gold);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .credits-text {
+            color: var(--gray-200);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .credits-text strong {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            color: var(--gray-200);
+            font-size: 0.85rem;
+        }
+
+        .footer-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: var(--gray-200);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-mascot {
+                margin: 0 auto;
+                width: 150px;
+                height: 150px;
+                font-size: 4rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .prediction-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ronald-advice {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .advice-avatar {
+                margin: 0 auto;
+            }
+
+            .challenge-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-jb">JB</div>
+                <div class="logo-text">
+                    <span class="brand">JONAS BROWSER</span>
+                    <span class="tagline">HIGH-TECH</span>
+                </div>
+                <div class="college-pro-badge">
+                    🎓 Collège Pro
+                </div>
+            </div>
+            <div class="user-stats">
+                <div class="stat-badge gold">⭐ <span id="total-points">1250</span></div>
+                <div class="stat-badge purple">🏆 <span id="total-badges">12</span></div>
+                <div class="stat-badge green">🔥 <span id="streak">5</span>j</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-view="welcome">🏠 Accueil</button>
+            <button class="nav-tab" data-view="quiz">❓ Quiz</button>
+            <button class="nav-tab" data-view="predictions">🔮 Brevet 2026</button>
+            <button class="nav-tab" data-view="progress">📊 Progression</button>
+            <button class="nav-tab" data-view="chat">💬 Parler à Ronald</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Welcome View -->
+        <section id="welcome" class="view active">
+            <!-- First in France Banner -->
+            <div class="first-banner">
+                🇫🇷 <span>PREMIER AGENT IA EN FRANCE</span> qui prédit les sujets du Brevet 2026 ! 🎯
+            </div>
+
+            <!-- Hero Card -->
+            <div class="hero-card">
+                <div class="hero-content">
+                    <div>
+                        <span class="hero-badge">🎯 Niveau 4ÈME</span>
+                        <h1 class="hero-title">Salut ! Je suis <span>Ronald</span>, ton assistant IA ! 👋</h1>
+                        <p class="hero-description">
+                            Je suis là pour t'aider à réussir le Brevet 2026 ! Grâce à mon analyse de 10 ans d'annales 
+                            et ma connaissance du programme officiel, je peux prédire les sujets qui vont tomber 
+                            et t'aider à réviser efficacement. C'est parti ?
+                        </p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" onclick="switchView('quiz')">🚀 Commencer un Quiz</button>
+                            <button class="btn btn-secondary" onclick="switchView('predictions')">🔮 Voir les Prédictions</button>
+                        </div>
+                    </div>
+                    <div class="hero-mascot">🎓</div>
+                </div>
+            </div>
+
+            <!-- Daily Challenge -->
+            <div class="challenge-card">
+                <div class="challenge-info">
+                    <h3>🎯 Défi du Jour</h3>
+                    <p>Complète 3 quiz en Mathématiques pour gagner 100 points bonus !</p>
+                    <div class="challenge-progress">
+                        <div class="challenge-step done">✓</div>
+                        <div class="challenge-step pending">2</div>
+                        <div class="challenge-step pending">3</div>
+                        <span style="color: var(--primary-blue-dark); font-size: 0.9rem;">1/3 complété</span>
+                    </div>
+                </div>
+                <button class="challenge-btn" onclick="switchView('quiz')">Jouer →</button>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card" onclick="switchView('progress')">
+                    <div class="stat-icon">📐</div>
+                    <div class="stat-value">72%</div>
+                    <div class="stat-label">Mathématiques</div>
+                </div>
+                <div class="stat-card" onclick="switchView('progress')">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-value">65%</div>
+                    <div class="stat-label">Français</div>
+                </div>
+                <div class="stat-card" onclick="switchView('progress')">
+                    <div class="stat-icon">🌍</div>
+                    <div class="stat-value">58%</div>
+                    <div class="stat-label">Histoire-Géo</div>
+                </div>
+                <div class="stat-card" onclick="switchView('progress')">
+                    <div class="stat-icon">🔬</div>
+                    <div class="stat-value">78%</div>
+                    <div class="stat-label">Sciences</div>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎤</div>
+                    <h3>Assistant Vocal</h3>
+                    <p>Pose tes questions à l'oral, Ronald te répond comme un ami ! Disponible 24h/24.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔮</div>
+                    <h3>Prédictions IA</h3>
+                    <p>Algorithme Machine Learning analysant 10 ans d'annales pour prédire le Brevet 2026.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3>Gamification</h3>
+                    <p>Gagne des points, débloque des badges et monte de niveau en révisant !</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz View -->
+        <section id="quiz" class="view">
+            <div class="quiz-container">
+                <div class="quiz-card" id="quiz-content">
+                    <!-- Quiz content will be injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Predictions View -->
+        <section id="predictions" class="view">
+            <div class="predictions-header">
+                <div class="predictions-title">
+                    <span style="font-size: 2.5rem;">🔮</span>
+                    <div>
+                        <h2>Prédictions Brevet 2026</h2>
+                        <p style="color: var(--gray-200); font-size: 0.9rem;">Analyse IA basée sur 10 ans d'annales (2016-2025)</p>
+                    </div>
+                </div>
+                <div class="subject-tabs">
+                    <button class="subject-tab active" data-subject="mathematiques">📐 Mathématiques</button>
+                    <button class="subject-tab" data-subject="francais">📚 Français</button>
+                    <button class="subject-tab" data-subject="histoire_geo">🌍 Histoire-Géo</button>
+                    <button class="subject-tab" data-subject="sciences">🔬 Sciences</button>
+                </div>
+            </div>
+
+            <div class="prediction-grid" id="predictions-content">
+                <!-- Predictions will be injected here -->
+            </div>
+
+            <div class="ronald-advice">
+                <div class="advice-avatar">💬</div>
+                <div class="advice-content">
+                    <h4>Conseil de Ronald :</h4>
+                    <p>"Concentre tes révisions sur les sujets en vert (70%+) ! Ils ont de très fortes chances de tomber au Brevet. Une fois maîtrisés, passe aux sujets orange pour être vraiment prêt ! 💪"</p>
+                    <button class="btn btn-primary" onclick="switchView('quiz')">🚀 S'entraîner sur ces sujets</button>
+                </div>
+            </div>
+
+            <div class="methodology-card">
+                <h3 class="methodology-title">🔬 Notre Méthodologie</h3>
+                <div class="methodology-grid">
+                    <div class="methodology-item">
+                        <div class="icon">📚</div>
+                        <h4>10 ans d'annales</h4>
+                        <p>Analyse des sujets 2016-2025</p>
+                    </div>
+                    <div class="methodology-item">
+                        <div class="icon">📋</div>
+                        <h4>Programme officiel</h4>
+                        <p>Éducation Nationale 2026</p>
+                    </div>
+                    <div class="methodology-item">
+                        <div class="icon">📰</div>
+                        <h4>Actualités</h4>
+                        <p>Tendances et enjeux 2026</p>
+                    </div>
+                    <div class="methodology-item">
+                        <div class="icon">🤖</div>
+                        <h4>Machine Learning</h4>
+                        <p>Algorithmes prédictifs avancés</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress View -->
+        <section id="progress" class="view">
+            <div class="progress-grid">
+                <div class="progress-card">
+                    <div class="progress-card-header">
+                        <div class="progress-ring">
+                            <svg width="80" height="80">
+                                <circle cx="40" cy="40" r="35" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
+                                <circle cx="40" cy="40" r="35" fill="none" stroke="#3b82f6" stroke-width="8" 
+                                    stroke-dasharray="220" stroke-dashoffset="62" stroke-linecap="round"/>
+                            </svg>
+                            <span class="progress-ring-text">72%</span>
+                        </div>
+                        <div>
+                            <h3 style="font-weight: 700;">📐 Mathématiques</h3>
+                            <p class="progress-card-status">💪 Bien parti !</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 24px; height: 24px; background: #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">✓</div>
+                            <span style="font-size: 0.9rem;">Pythagore & Thalès</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 24px; height: 24px; background: #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">✓</div>
+                            <span style="font-size: 0.9rem;">Probabilités</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 24px; height: 24px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">3</div>
+                            <span style="font-size: 0.9rem; color: var(--gray-200);">Fonctions affines</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <div class="progress-card-header">
+                        <div class="progress-ring">
+                            <svg width="80" height="80">
+                                <circle cx="40" cy="40" r="35" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
+                                <circle cx="40" cy="40" r="35" fill="none" stroke="#8b5cf6" stroke-width="8" 
+                                    stroke-dasharray="220" stroke-dashoffset="77" stroke-linecap="round"/>
+                            </svg>
+                            <span class="progress-ring-text">65%</span>
+                        </div>
+                        <div>
+                            <h3 style="font-weight: 700;">📚 Français</h3>
+                            <p class="progress-card-status">💪 Bien parti !</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 24px; height: 24px; background: #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">✓</div>
+                            <span style="font-size: 0.9rem;">Analyse de texte</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 24px; height: 24px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">2</div>
+                            <span style="font-size: 0.9rem; color: var(--gray-200);">Argumentation</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 24px; height: 24px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">3</div>
+                            <span style="font-size: 0.9rem; color: var(--gray-200);">Conjugaison</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <div class="progress-card-header">
+                        <div class="progress-ring">
+                            <svg width="80" height="80">
+                                <circle cx="40" cy="40" r="35" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
+                                <circle cx="40" cy="40" r="35" fill="none" stroke="#10b981" stroke-width="8" 
+                                    stroke-dasharray="220" stroke-dashoffset="92" stroke-linecap="round"/>
+                            </svg>
+                            <span class="progress-ring-text">58%</span>
+                        </div>
+                        <div>
+                            <h3 style="font-weight: 700;">🌍 Histoire-Géo</h3>
+                            <p class="progress-card-status">📚 Continue !</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 24px; height: 24px; background: #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">✓</div>
+                            <span style="font-size: 0.9rem;">Seconde Guerre mondiale</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 24px; height: 24px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">2</div>
+                            <span style="font-size: 0.9rem; color: var(--gray-200);">Union Européenne</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 24px; height: 24px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">3</div>
+                            <span style="font-size: 0.9rem; color: var(--gray-200);">Développement durable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <div class="progress-card-header">
+                        <div class="progress-ring">
+                            <svg width="80" height="80">
+                                <circle cx="40" cy="40" r="35" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
+                                <circle cx="40" cy="40" r="35" fill="none" stroke="#f59e0b" stroke-width="8" 
+                                    stroke-dasharray="220" stroke-dashoffset="48" stroke-linecap="round"/>
+                            </svg>
+                            <span class="progress-ring-text">78%</span>
+                        </div>
+                        <div>
+                            <h3 style="font-weight: 700;">🔬 Sciences</h3>
+                            <p class="progress-card-status">🌟 Excellent !</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 24px; height: 24px; background: #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">✓</div>
+                            <span style="font-size: 0.9rem;">Énergie & conversions</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 24px; height: 24px; background: #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">✓</div>
+                            <span style="font-size: 0.9rem;">Circuits électriques</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 24px; height: 24px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">3</div>
+                            <span style="font-size: 0.9rem; color: var(--gray-200);">Programmation Scratch</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Summary -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-value">8h30</div>
+                    <div class="stat-label">Temps de révision</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-value">47</div>
+                    <div class="stat-label">Quiz complétés</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-value">78%</div>
+                    <div class="stat-label">Taux de réussite</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-value">5j</div>
+                    <div class="stat-label">Série en cours</div>
+                </div>
+            </div>
+
+            <!-- Badges -->
+            <div class="badges-container">
+                <h3 class="badges-title">🏆 Tes Badges (12)</h3>
+                <div class="badges-grid">
+                    <div class="badge-item unlocked"><span class="badge-icon">🌟</span> Premier Pas</div>
+                    <div class="badge-item unlocked"><span class="badge-icon">📐</span> Expert Pythagore</div>
+                    <div class="badge-item unlocked"><span class="badge-icon">🎲</span> As des Probas</div>
+                    <div class="badge-item unlocked"><span class="badge-icon">🔥</span> 5 jours de suite</div>
+                    <div class="badge-item unlocked"><span class="badge-icon">💎</span> Quiz Parfait</div>
+                    <div class="badge-item locked"><span class="badge-icon">🚀</span> Niveau 10 🔒</div>
+                    <div class="badge-item locked"><span class="badge-icon">🏆</span> Champion Maths 🔒</div>
+                    <div class="badge-item locked"><span class="badge-icon">👑</span> Maître du Brevet 🔒</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chat View -->
+        <section id="chat" class="view">
+            <div class="chat-container">
+                <div class="chat-card">
+                    <div class="chat-header">
+                        <div class="chat-avatar">🎓</div>
+                        <div class="chat-info">
+                            <h3>Ronald</h3>
+                            <p class="status"><span class="status-dot"></span> En ligne - Prêt à t'aider !</p>
+                        </div>
+                        <button style="margin-left: auto; background: rgba(0,0,0,0.2); border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.3rem; cursor: pointer;">🎤</button>
+                    </div>
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- Messages will be injected here -->
+                    </div>
+                    <div class="chat-input-area">
+                        <div class="chat-input-wrapper">
+                            <input type="text" class="chat-input" id="chat-input" placeholder="Pose ta question à Ronald..." onkeypress="handleChatKeypress(event)">
+                            <button class="send-btn" onclick="sendMessage()">Envoyer</button>
+                        </div>
+                        <div class="quick-replies">
+                            <button class="quick-reply" onclick="setQuickReply('Aide pour le Brevet')">Aide pour le Brevet</button>
+                            <button class="quick-reply" onclick="setQuickReply('Explique Pythagore')">Explique Pythagore</button>
+                            <button class="quick-reply" onclick="setQuickReply('C\\'est difficile 😅')">C'est difficile 😅</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-credits">
+                <h4 class="credits-title">💡 Concept & Développement</h4>
+                <p class="credits-text">
+                    <strong>Ronald - Agent IA Collégiens</strong> est le <strong>premier agent IA en France</strong> 
+                    spécialisé dans la prédiction des sujets du Brevet 2026.<br><br>
+                    Concept et idée développés par <strong>Ingénieure Gautier Hayet</strong><br>
+                    Produit par <strong>SARL Jonas Browser High-Tech</strong>
+                </p>
+            </div>
+
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">JB</div>
+                        <span class="footer-logo-text">JONAS BROWSER</span>
+                    </div>
+                    <p class="footer-description">
+                        Équipez votre réussite avec nous ! Jonas Browser High-Tech accompagne les collégiens 
+                        vers l'excellence avec des solutions IA innovantes.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>📍 Contact</h4>
+                    <p>SARL Jonas Browser High-Tech</p>
+                    <p>France</p>
+                    <p>contact@jonas-browser-hightech.fr</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>🔗 Liens Utiles</h4>
+                    <a href="#">Programme Collège Pro</a>
+                    <a href="#">Conditions Générales</a>
+                    <a href="#">Politique de Confidentialité</a>
+                    <a href="#">Support</a>
+                </div>
+
+                <div class="footer-section">
+                    <h4>💳 Facilités de Paiement</h4>
+                    <p>Paiement en 1x, 2x, 3x</p>
+                    <p>Sans frais</p>
+                    <p style="margin-top: 1rem; color: var(--primary-gold);">🎓 Pack Collège Pro disponible</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 SARL Jonas Browser High-Tech - Tous droits réservés</p>
+                <div class="footer-badges">
+                    <span class="footer-badge">🔒 Conforme RGPD</span>
+                    <span class="footer-badge">🛡️ Données Sécurisées</span>
+                    <span class="footer-badge">🇫🇷 Made in France</span>
+                    <span class="footer-badge">📱 Version Demo 2026</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data
+        const predictions = {
+            mathematiques: {
+                tres_probable: [
+                    { topic: 'Théorème de Pythagore', confidence: 92, icon: '📐' },
+                    { topic: 'Probabilités simples', confidence: 88, icon: '🎲' },
+                    { topic: 'Fonctions affines', confidence: 85, icon: '📈' },
+                    { topic: 'Algorithme Scratch', confidence: 82, icon: '💻' }
+                ],
+                probable: [
+                    { topic: 'Calcul littéral', confidence: 68, icon: '🔢' },
+                    { topic: 'Statistiques', confidence: 65, icon: '📊' }
+                ]
+            },
+            francais: {
+                tres_probable: [
+                    { topic: 'Analyse de texte littéraire', confidence: 88, icon: '📖' },
+                    { topic: 'Rédaction argumentative', confidence: 85, icon: '✍️' },
+                    { topic: 'Conjugaison temps composés', confidence: 80, icon: '⏰' }
+                ],
+                probable: [
+                    { topic: 'Figures de style', confidence: 70, icon: '🎭' },
+                    { topic: 'Classes grammaticales', confidence: 65, icon: '📝' }
+                ]
+            },
+            histoire_geo: {
+                tres_probable: [
+                    { topic: 'Seconde Guerre mondiale', confidence: 90, icon: '⚔️' },
+                    { topic: 'Union Européenne', confidence: 85, icon: '🇪🇺' },
+                    { topic: 'Développement durable', confidence: 82, icon: '🌱' }
+                ],
+                probable: [
+                    { topic: 'Guerre froide', confidence: 70, icon: '❄️' },
+                    { topic: 'Mondialisation', confidence: 68, icon: '🌐' }
+                ]
+            },
+            sciences: {
+                tres_probable: [
+                    { topic: 'Énergie et conversions', confidence: 88, icon: '⚡' },
+                    { topic: 'Circuit électrique', confidence: 85, icon: '🔌' },
+                    { topic: 'Programmation Scratch', confidence: 82, icon: '🤖' }
+                ],
+                probable: [
+                    { topic: 'Chimie - atomes', confidence: 72, icon: '⚛️' },
+                    { topic: 'Corps humain', confidence: 68, icon: '🫀' }
+                ]
+            }
+        };
+
+        const quizQuestions = [
+            {
+                question: "Dans un triangle rectangle, quel théorème permet de calculer la longueur de l'hypoténuse ?",
+                options: ['Théorème de Thalès', 'Théorème de Pythagore', 'Théorème des milieux', 'Théorème de la médiane'],
+                correct: 1,
+                explanation: "Le théorème de Pythagore s'applique aux triangles rectangles : a² + b² = c² où c est l'hypoténuse."
+            },
+            {
+                question: "Quelle est la probabilité d'obtenir un 6 en lançant un dé équilibré ?",
+                options: ['1/2', '1/3', '1/6', '1/12'],
+                correct: 2,
+                explanation: "Un dé a 6 faces équiprobables, donc P(6) = 1/6."
+            },
+            {
+                question: "Si f(x) = 2x + 3, quelle est l'image de 4 par f ?",
+                options: ['8', '11', '14', '7'],
+                correct: 1,
+                explanation: "f(4) = 2×4 + 3 = 8 + 3 = 11"
+            }
+        ];
+
+        const ronaldResponses = {
+            default: [
+                "Super question ! 🎯 Laisse-moi t'expliquer ça simplement...",
+                "Ah je vois ce qui te bloque ! On va démêler ça ensemble 💪",
+                "Excellente réflexion ! Voici comment je vois les choses..."
+            ],
+            encouragement: [
+                "Tu progresses vraiment bien ! Continue comme ça ! 🌟",
+                "Chaque effort compte, et je vois que tu travailles dur !",
+                "Pas grave si c'est difficile, on avance ensemble ! 💪"
+            ],
+            brevet: [
+                "Pour le Brevet 2026, je te conseille de te concentrer sur les sujets à forte probabilité ! D'après mon analyse, Pythagore et les probabilités ont plus de 85% de chances de tomber.",
+                "D'après mon analyse des 10 dernières années, Pythagore tombe 9 fois sur 10 ! 📊 Concentre-toi dessus en priorité.",
+                "Les algorithmes Scratch sont de plus en plus présents depuis 2022. Je te recommande de bien maîtriser ce sujet pour le Brevet 2026 !"
+            ]
+        };
+
+        // State
+        let currentView = 'welcome';
+        let currentSubject = 'mathematiques';
+        let currentQuizIndex = 0;
+        let quizAnswers = {};
+        let showQuizResult = false;
+        let totalPoints = 1250;
+        let chatMessages = [
+            { from: 'ronald', text: "Salut ! 👋 Je suis Ronald, ton assistant IA pour réussir le Brevet 2026 ! Comment je peux t'aider aujourd'hui ?" }
+        ];
+
+        // View switching
+        function switchView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            
+            document.getElementById(viewId).classList.add('active');
+            document.querySelector(`[data-view="${viewId}"]`).classList.add('active');
+            
+            currentView = viewId;
+
+            if (viewId === 'quiz') renderQuiz();
+            if (viewId === 'predictions') renderPredictions();
+            if (viewId === 'chat') renderChat();
+        }
+
+        // Navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => switchView(tab.dataset.view));
+        });
+
+        // Subject tabs
+        document.querySelectorAll('.subject-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.subject-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentSubject = tab.dataset.subject;
+                renderPredictions();
+            });
+        });
+
+        // Render Predictions
+        function renderPredictions() {
+            const data = predictions[currentSubject];
+            const container = document.getElementById('predictions-content');
+            
+            container.innerHTML = `
+                <div class="prediction-section high">
+                    <h3>🎯 Très Probable (70-95%)</h3>
+                    ${data.tres_probable.map(item => `
+                        <div class="prediction-card">
+                            <div class="prediction-header">
+                                <span class="prediction-topic">
+                                    <span>${item.icon}</span>
+                                    ${item.topic}
+                                </span>
+                                <span class="prediction-confidence high">${item.confidence}%</span>
+                            </div>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill high" style="width: ${item.confidence}%"></div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="prediction-section medium">
+                    <h3>📊 Probable (50-70%)</h3>
+                    ${data.probable.map(item => `
+                        <div class="prediction-card">
+                            <div class="prediction-header">
+                                <span class="prediction-topic">
+                                    <span>${item.icon}</span>
+                                    ${item.topic}
+                                </span>
+                                <span class="prediction-confidence medium">${item.confidence}%</span>
+                            </div>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill medium" style="width: ${item.confidence}%"></div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Render Quiz
+        function renderQuiz() {
+            const container = document.getElementById('quiz-content');
+            
+            if (showQuizResult) {
+                const correctCount = Object.entries(quizAnswers).filter(
+                    ([idx, ans]) => quizQuestions[parseInt(idx)]?.correct === ans
+                ).length;
+                
+                const message = correctCount === quizQuestions.length
+                    ? "Parfait ! Tu maîtrises ce chapitre ! 🌟"
+                    : correctCount >= 2
+                        ? "Bien joué ! Continue comme ça, tu progresses ! 💪"
+                        : "Pas grave ! On révise ensemble et tu vas cartonner ! 📚";
+
+                container.innerHTML = `
+                    <div class="quiz-result">
+                        <div class="result-icon">🎉</div>
+                        <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Quiz terminé !</h2>
+                        <p style="color: var(--gray-200);">Voyons ton score...</p>
+                        
+                        <div class="result-score">
+                            <div class="score">${correctCount}/${quizQuestions.length}</div>
+                            <div class="label">Bonnes réponses</div>
+                        </div>
+
+                        <div style="background: rgba(201, 162, 39, 0.1); border: 1px solid rgba(201, 162, 39, 0.3); border-radius: 15px; padding: 1rem; margin: 1.5rem 0;">
+                            <p><strong style="color: var(--primary-gold);">💬 Ronald :</strong> ${message}</p>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                            <button class="btn btn-primary" onclick="resetQuiz()">🔄 Refaire le Quiz</button>
+                            <button class="btn btn-secondary" onclick="switchView('predictions')">🔮 Voir les Prédictions</button>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            const question = quizQuestions[currentQuizIndex];
+            const progress = ((currentQuizIndex + 1) / quizQuestions.length) * 100;
+            const answered = quizAnswers.hasOwnProperty(currentQuizIndex);
+
+            container.innerHTML = `
+                <div class="quiz-header">
+                    <span class="quiz-subject">📐 Mathématiques</span>
+                    <span style="color: var(--gray-200);">Question ${currentQuizIndex + 1}/${quizQuestions.length}</span>
+                </div>
+                <div class="quiz-progress-bar">
+                    <div class="quiz-progress-fill" style="width: ${progress}%"></div>
+                </div>
+                <h2 class="quiz-question">${question.question}</h2>
+                <div class="quiz-options">
+                    ${question.options.map((option, idx) => {
+                        const isSelected = quizAnswers[currentQuizIndex] === idx;
+                        const isCorrect = question.correct === idx;
+                        let className = 'quiz-option';
+                        if (answered) {
+                            if (isSelected && isCorrect) className += ' correct';
+                            else if (isSelected && !isCorrect) className += ' wrong';
+                            else if (isCorrect) className += ' correct';
+                        }
+                        return `
+                            <div class="${className}" onclick="handleQuizAnswer(${idx})" ${answered ? 'style="pointer-events: none;"' : ''}>
+                                <span class="option-letter">${String.fromCharCode(65 + idx)}</span>
+                                ${option}
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+                ${answered ? `
+                    <div class="quiz-explanation">
+                        <span class="quiz-explanation-icon">💡</span>
+                        <div>
+                            <p style="font-weight: 700; margin-bottom: 0.3rem; color: var(--primary-gold);">Explication de Ronald :</p>
+                            <p>${question.explanation}</p>
+                        </div>
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        function handleQuizAnswer(answerIndex) {
+            if (quizAnswers.hasOwnProperty(currentQuizIndex)) return;
+            
+            quizAnswers[currentQuizIndex] = answerIndex;
+            renderQuiz();
+
+            if (currentQuizIndex < quizQuestions.length - 1) {
+                setTimeout(() => {
+                    currentQuizIndex++;
+                    renderQuiz();
+                }, 2000);
+            } else {
+                setTimeout(() => {
+                    showQuizResult = true;
+                    const correctCount = Object.entries(quizAnswers).filter(
+                        ([idx, ans]) => quizQuestions[parseInt(idx)]?.correct === ans
+                    ).length;
+                    totalPoints += correctCount * 50;
+                    document.getElementById('total-points').textContent = totalPoints;
+                    renderQuiz();
+                }, 2000);
+            }
+        }
+
+        function resetQuiz() {
+            currentQuizIndex = 0;
+            quizAnswers = {};
+            showQuizResult = false;
+            renderQuiz();
+        }
+
+        // Chat
+        function renderChat() {
+            const container = document.getElementById('chat-messages');
+            container.innerHTML = chatMessages.map(msg => `
+                <div class="message ${msg.from}">
+                    <div class="message-avatar">${msg.from === 'ronald' ? 'R' : '👤'}</div>
+                    <div class="message-bubble">${msg.text}</div>
+                </div>
+            `).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            chatMessages.push({ from: 'user', text });
+            input.value = '';
+            renderChat();
+
+            // Show typing
+            const container = document.getElementById('chat-messages');
+            container.innerHTML += `
+                <div class="message ronald" id="typing">
+                    <div class="message-avatar">R</div>
+                    <div class="message-bubble">
+                        <div class="typing-indicator">
+                            <span class="typing-dot"></span>
+                            <span class="typing-dot"></span>
+                            <span class="typing-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.scrollTop = container.scrollHeight;
+
+            setTimeout(() => {
+                const responseType = text.toLowerCase().includes('brevet') ? 'brevet' : 
+                                    text.toLowerCase().includes('difficile') || text.toLowerCase().includes('aide') ? 'encouragement' : 'default';
+                const responses = ronaldResponses[responseType];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                
+                chatMessages.push({ from: 'ronald', text: randomResponse });
+                renderChat();
+            }, 1500);
+        }
+
+        function handleChatKeypress(event) {
+            if (event.key === 'Enter') sendMessage();
+        }
+
+        function setQuickReply(text) {
+            document.getElementById('chat-input').value = text;
+            sendMessage();
+        }
+
+        // Initialize
+        renderPredictions();
+        renderQuiz();
+        renderChat();
+    </script>
+</body>
+</html>
